@@ -40,4 +40,4 @@ Type: `string`
 
 ## License
 
-MIT © [Simon](https://github.com/SimonJang)
+MIT © [Simon Jang](https://github.com/SimonJang)
