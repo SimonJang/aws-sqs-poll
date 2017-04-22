@@ -13,7 +13,7 @@ class SQS {
 	}
 	receiveMessage(opts, cb) {
 		console.log('FIXTURE :: executing function getQueueUrl')
-        console.log('FIXTURE :: printing arguments for receiveMessage')
+        console.log('FIXTURE :: printing arguments for receiveMessage', opts)
 		cb(undefined, {Messages: ['message1', 'message2', 'message3']});
 	}
 }
