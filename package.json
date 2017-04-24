@@ -19,11 +19,17 @@
     "index.js"
   ],
   "keywords": [
-    ""
+    "AWS",
+    "amazon",
+    "SQS",
+    "polling",
+    "lambda",
+    "messages"
   ],
   "dependencies": {
     "is-obj": "^1.0.1",
-    "pify": "^2.3.0"
+    "pify": "^2.3.0",
+    "rxjs": "^5.3.0"
   },
   "devDependencies": {
     "ava": "^0.17.0",
