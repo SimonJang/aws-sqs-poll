@@ -11,7 +11,6 @@ module.exports = (queueName, opts) => {
 	opts = Object.assign({
 		timeout: 0,
 		numberOfMessages: 10,
-		awsAccountId: process.env.AWS_ACCOUNT_ID,
 		json: false
 	}, opts);
 
@@ -27,7 +26,7 @@ module.exports = (queueName, opts) => {
 	if (!/^[a-z0-9_-]{1,80}$/i.test(queueName)) {
 		return Promise.reject(new TypeError('Invalid queue name'));
 	}
-	if (!opts.awsAccountId || !isAWSID(opts.awsAccountId)) {
+	if (opts.awsAccountId && !isAWSID(opts.awsAccountId)) {
 		return Promise.reject(new TypeError('Invalid AWS Account Id'));
 	}
 
@@ -37,22 +36,20 @@ module.exports = (queueName, opts) => {
 			QueueOwnerAWSAccountId: opts.awsAccountId
 		}
 	)
-	.then(url => {
-		if (!url.QueueUrl && url.QueueUrl.length === 0) {
-			throw new TypeError('Queue not found');
+	.then(data => {
+		if (!data || !data.QueueUrl) {
+			throw new TypeError(`Queue \`${queueName}\` not found`);
 		}
-		return url.QueueUrl;
+		return data.QueueUrl;
 	})
 	.then(url => {
-		console.log('Logging url result', url);
 		return poll({
 			QueueUrl: url,
-			MaxNumberOfMessages: opts.MaxNumberOfMessages,
+			MaxNumberOfMessages: opts.numberOfMessages,
 			WaitTimeSeconds: opts.timeout
 		});
 	})
 	.then(data => {
-		console.log('Logging data', data);
 		if (opts.json) {
 			return data.Messages.map(message => {
 				try {

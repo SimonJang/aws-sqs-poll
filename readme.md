@@ -21,22 +21,49 @@ $ npm install --save aws-sqs-poll
 ```js
 const awsSqsPoll = require('aws-sqs-poll');
 
-awsSqsPoll('QueueName', 'UserAWSAccountID')
-    // { Messages: [messages] }
+awsSqsPoll('QueueName', [options])
+    //  [messages]
 ```
 
 ## API
 
-### aws-sqs-poll(queueName, AWSAccountID)
+### aws-sqs-poll(queueName, options)
 
 #### queueName
 
 Type: `string`
 
-#### AWSAccountID
+#### options
+
+Type: `object`
+
+
+`options.awsAccountId`
 
 Type: `string`
 
+AWS account ID of the account that created the queue.
+
+
+`options.numberOfMessages`
+
+Type: `number`
+
+Number of messages to be retrieved in 1 polling action.
+
+
+`options.timeout`
+
+Type: `number`
+
+Timeout to listen to the queue for new messages.
+
+
+`options.json`
+
+Type: `boolean`
+
+Flag for converting the data back to JSON format
 
 ## License
 
