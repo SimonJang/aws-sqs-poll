@@ -1,6 +1,6 @@
 {
   "name": "aws-sqs-poll",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Polling messages from AWS SQS",
   "license": "MIT",
   "repository": "SimonJang/aws-sqs-poll",
