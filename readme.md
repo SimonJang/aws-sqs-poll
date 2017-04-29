@@ -21,13 +21,23 @@ $ npm install --save aws-sqs-poll
 ```js
 const awsSqsPoll = require('aws-sqs-poll');
 
-awsSqsPoll('QueueName', [options])
-    //  [messages]
+awsSqsPoll('QueueName')
+    //  ["MessageId": "28f61fd2-b9ca-4cb9-879a-71ea8bce4636",
+    //   "ReceiptHandle": "AQEB9mnsxtAZlwnDERxn3yADAP96QRe0KPbqaKXLvvchqmD4jAr",
+    //   "MD5OfBody": "098f6bcd4621d373cade4e832627b4f6",
+    //   "Body": "test"]
+
+
+awsSqsPoll('QueueName', {AwsAccountId: '123456789012', numberOfMessages: 1, timeout: 20, json: false})
+    //  ["MessageId": "28f61fd2-b9ca-4cb9-879a-71ea8bce4636",
+    //   "ReceiptHandle": "AQEB9mnsxtAZlwnDERxn3yADAP96QRe0KPbqaKXLvvchqmD4jAr",
+    //   "MD5OfBody": "098f6bcd4621d373cade4e832627b4f6",
+    //   "Body": "test"]
 ```
 
 ## API
 
-### aws-sqs-poll(queueName, options)
+### aws-sqs-poll(queueName, [options])
 
 #### queueName
 
@@ -38,28 +48,28 @@ Type: `string`
 Type: `object`
 
 
-`options.awsAccountId`
+##### options.awsAccountId
 
 Type: `string`
 
 AWS account ID of the account that created the queue.
 
 
-`options.numberOfMessages`
+##### options.numberOfMessages
 
 Type: `number`
 
-Number of messages to be retrieved in 1 polling action.
+Number of messages to be retrieved in 1 polling action. When polling a queue with few messages (< 1000 messages), you will get less messages then the numberOfMessages parameter.
 
 
-`options.timeout`
+##### options.timeout
 
 Type: `number`
 
-Timeout to listen to the queue for new messages.
+Timeout (polling time) to listen to the queue for new messages.
 
 
-`options.json`
+##### options.json
 
 Type: `boolean`
 
