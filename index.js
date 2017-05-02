@@ -54,10 +54,12 @@ module.exports = (queueName, opts) => {
 		if (opts.json) {
 			return data.Messages.map(message => {
 				try {
-					return {Body:JSON.parse(message.Body), ReceiptHandle: message.ReceiptHandle};
+					message.Body = JSON.parse(message.Body);
 				} catch (err) {
-					return message.Body;
+					// Do nothing
 				}
+
+				return message;
 			});
 		}
 		return data.Messages;

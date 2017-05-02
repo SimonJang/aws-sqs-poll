@@ -26,12 +26,12 @@ test('returns messages and promise', async t => {
 
 test('Testing json argument', async t => {
 	const result = await m('jsonQueue', {json: true});
-	t.deepEqual(result, [ { Body: { messages: ['message1', 'message2', 'message3'], description: 'someArray' }, ReceiptHandle: '1234556789' } ]);
-})
+	console.log(JSON.stringify('json test result', JSON.stringify(result)));
+	t.deepEqual(result, [{Body: {messages: ['message1', 'message2', 'message3'], description: 'someArray'}, ReceiptHandle: '1234556789'}]);
+});
 
 test('Testing json argument with multiple argument', async t => {
 	const result = await m('mjsonQueue', {json: true});
-	console.log(result);
-	t.deepEqual(result, [ { Body: { messages: ['message1', 'message2', 'message3'], description: 'someArray' }, ReceiptHandle: '1234556789' },
-	{ Body: { messages: ['message1', 'message2', 'message3'], description: 'someArray' }, ReceiptHandle: '1233556789' }]);
-})
+	t.deepEqual(result, [{Body: {messages: ['message1', 'message2', 'message3'], description: 'someArray'}, ReceiptHandle: '1234556789'},
+	{Body: {messages: ['message1', 'message2', 'message3'], description: 'someArray'}, ReceiptHandle: '1233556789'}]);
+});
