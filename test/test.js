@@ -18,8 +18,20 @@ test('invalid queue not found test', async t => {
 	await t.throws(m('trolololo', {awsAccountId: '123456789111'}), 'Queue `trolololo` not found');
 });
 
-test('returns promise', async t => {
+test('returns messages and promise', async t => {
 	const result = await m('demoQueue', {awsAccountId: '123456789111'});
 	const messages = {Messages: ['message1', 'message2', 'message3']};
 	t.deepEqual(result, messages.Messages);
 });
+
+test('Testing json argument', async t => {
+	const result = await m('jsonQueue', {json: true});
+	t.deepEqual(result, [ { Body: { messages: ['message1', 'message2', 'message3'], description: 'someArray' }, ReceiptHandle: '1234556789' } ]);
+})
+
+test('Testing json argument with multiple argument', async t => {
+	const result = await m('mjsonQueue', {json: true});
+	console.log(result);
+	t.deepEqual(result, [ { Body: { messages: ['message1', 'message2', 'message3'], description: 'someArray' }, ReceiptHandle: '1234556789' },
+	{ Body: { messages: ['message1', 'message2', 'message3'], description: 'someArray' }, ReceiptHandle: '1233556789' }]);
+})

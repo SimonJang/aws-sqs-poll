@@ -46,14 +46,15 @@ module.exports = (queueName, opts) => {
 		return poll({
 			QueueUrl: url,
 			MaxNumberOfMessages: opts.numberOfMessages,
-			WaitTimeSeconds: opts.timeout
+			WaitTimeSeconds: opts.timeout,
+			AttributeNames: ['ApproximateNumberOfMessages']
 		});
 	})
 	.then(data => {
 		if (opts.json) {
 			return data.Messages.map(message => {
 				try {
-					return JSON.parse(message.Body);
+					return {Body:JSON.parse(message.Body), ReceiptHandle: message.ReceiptHandle};
 				} catch (err) {
 					return message.Body;
 				}
