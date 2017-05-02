@@ -51,7 +51,7 @@ module.exports = (queueName, opts) => {
 		});
 	})
 	.then(data => {
-		if (opts.json) {
+		if (opts.json && data.Messages) {
 			return data.Messages.map(message => {
 				try {
 					message.Body = JSON.parse(message.Body);
@@ -62,6 +62,6 @@ module.exports = (queueName, opts) => {
 				return message;
 			});
 		}
-		return data.Messages;
+		return data.Messages ? data.Messages : [];
 	});
 };
