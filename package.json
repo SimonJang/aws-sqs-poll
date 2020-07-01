@@ -10,7 +10,7 @@
     "url": "github.com/SimonJang"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=10"
   },
   "scripts": {
     "test": "xo && ava"
@@ -27,14 +27,13 @@
     "messages"
   ],
   "dependencies": {
-    "is-aws-account-id": "^1.0.0",
-    "pify": "^2.3.0"
+    "is-aws-account-id": "^1.0.0"
   },
   "devDependencies": {
-    "ava": "^0.19.1",
-    "aws-sdk": "^2.44.0",
-    "nyc": "^10.0.0",
-    "sinon": "^2.1.0",
-    "xo": "^0.18.1"
+    "ava": "^3.9.0",
+    "aws-sdk": "^2.709.0",
+    "nyc": "^15.1.0",
+    "sinon": "^9.0.2",
+    "xo": "^0.32.0"
   }
 }
