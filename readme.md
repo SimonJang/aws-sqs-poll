@@ -1,4 +1,4 @@
-# aws-sqs-poll [![Build Status](https://travis-ci.org/SimonJang/aws-sqs-poll.svg?branch=master)](https://travis-ci.org/SimonJang/aws-sqs-poll)
+# aws-sqs-poll ![CI](https://github.com/SimonJang/aws-sqs-poll/workflows/CI/badge.svg)
 
 > Polling messages from AWS SQS
 
