@@ -18,6 +18,12 @@ test('should fail when no queue is found', async t => {
 	await t.throwsAsync(m('trolololo', {awsAccountId: '123456789111'}), null, 'Queue `trolololo` not found');
 });
 
+test('should return messages with only the queuename', async t => {
+	const result = await m('demoQueue');
+
+	t.deepEqual(result, ['message1', 'message2', 'message3']);
+});
+
 test('should return messages', async t => {
 	const result = await m('demoQueue', {awsAccountId: '123456789111'});
 

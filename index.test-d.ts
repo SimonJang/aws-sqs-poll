@@ -16,3 +16,7 @@ expectType<Promise<unknown[]>>(
 expectType<Promise<unknown[]>>(
 	awsSQSPoll('somequeue', {numberOfMessages: 10, timeout: 10})
 );
+
+expectType<Promise<unknown[]>>(
+	awsSQSPoll('somequeue')
+);

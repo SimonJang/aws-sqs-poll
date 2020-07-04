@@ -24,6 +24,6 @@ interface Options {
  * @param options - Polling options
  * @returns A array of messages
  */
-declare function awsSQSPOll<T = unknown>(queueName: string, options: Options): Promise<T>;
+declare function awsSQSPOll<T = unknown>(queueName: string, options?: Options): Promise<T>;
 
 export = awsSQSPOll;
