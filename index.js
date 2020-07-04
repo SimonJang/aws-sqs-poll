@@ -2,9 +2,9 @@
 const AWS = require('aws-sdk');
 const isAwsAccountId = require('is-aws-account-id');
 
-const sqs = new AWS.SQS();
-
 module.exports = async (queueName, options) => {
+	const sqs = new AWS.SQS();
+
 	const defaultOptions = {
 		timeout: 0,
 		numberOfMessages: 10,
