@@ -43,17 +43,10 @@ awsSqsPoll('QueueName', {AwsAccountId: '123456789012', numberOfMessages: 1, time
 
 Type: `string`
 
-#### options
+#### [options]
 
 Type: `object`
-
-
-##### options.awsAccountId
-
-Type: `string`
-
-AWS account ID of the account that created the queue.
-
+*Optional*
 
 ##### options.numberOfMessages
 
@@ -68,10 +61,17 @@ Type: `number`
 
 Timeout (polling time) to listen to the queue for new messages.
 
+##### [options.awsAccountId]
 
-##### options.json
+Type: `string`
+*Optional*
+
+AWS account ID of the account that created the queue.
+
+##### [options.json]
 
 Type: `boolean`
+*Optional*
 
 Flag for converting the data back to JSON format
 
