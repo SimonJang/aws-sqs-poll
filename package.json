@@ -1,43 +1,46 @@
 {
-  "name": "aws-sqs-poll",
-  "version": "1.1.0-0",
-  "description": "Polling messages from AWS SQS",
-  "license": "MIT",
-  "repository": "SimonJang/aws-sqs-poll",
-  "author": {
-    "name": "Simon",
-    "email": "simon.jang.contact@gmail.com",
-    "url": "https://github.com/SimonJang"
-  },
-  "engines": {
-    "node": ">=10"
-  },
-  "scripts": {
-    "test": "xo && ava && tsd"
-  },
-  "files": [
-    "index.js",
-    "index.d.ts"
-  ],
-  "main": "index.js",
-  "types": "index.d.ts",
-  "keywords": [
-    "AWS",
-    "amazon",
-    "SQS",
-    "polling",
-    "lambda",
-    "messages"
-  ],
-  "dependencies": {
-    "is-aws-account-id": "^1.0.0"
-  },
-  "devDependencies": {
-    "ava": "^3.9.0",
-    "aws-sdk": "^2.709.0",
-    "nyc": "^15.1.0",
-    "sinon": "^9.0.2",
-    "tsd": "^0.12.1",
-    "xo": "^0.32.0"
-  }
+	"name": "aws-sqs-poll",
+	"version": "1.1.0-0",
+	"description": "Polling messages from AWS SQS",
+	"license": "MIT",
+	"repository": "SimonJang/aws-sqs-poll",
+	"author": {
+		"name": "Simon",
+		"email": "simon.jang.contact@gmail.com",
+		"url": "https://github.com/SimonJang"
+	},
+	"engines": {
+		"node": ">=10"
+	},
+	"scripts": {
+		"test": "xo && ava && tsd"
+	},
+	"files": [
+		"index.js",
+		"index.d.ts"
+	],
+	"main": "index.js",
+	"types": "index.d.ts",
+	"keywords": [
+		"AWS",
+		"amazon",
+		"SQS",
+		"polling",
+		"lambda",
+		"messages"
+	],
+	"dependencies": {
+		"is-aws-account-id": "^1.0.0"
+	},
+	"peerDependencies": {
+		"aws-sdk": "^2.709.0"
+	},
+	"devDependencies": {
+		"ava": "^3.9.0",
+		"aws-sdk": "^2.709.0",
+		"nyc": "^15.1.0",
+		"sinon": "^9.0.2",
+		"tsd": "^0.12.1",
+		"xo": "^0.32.0"
+	}
 }
