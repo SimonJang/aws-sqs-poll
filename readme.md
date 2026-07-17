@@ -1,79 +1,75 @@
-# aws-sqs-poll ![CI](https://github.com/SimonJang/aws-sqs-poll/workflows/CI/badge.svg)
+# aws-sqs-poll ![CI](https://github.com/SimonJang/aws-sqs-poll/actions/workflows/ci.yml/badge.svg)
 
-> Polling messages from AWS SQS
+> Poll messages from an AWS SQS queue.
 
-## Note on long polling
-
-Long polling helps reduce your cost of using Amazon SQS by reducing the number of empty responses (when there are no messages available to return in reply to a ReceiveMessage request sent to an Amazon SQS queue) and eliminating false empty responses (when messages are available in the queue but aren't included in the response):
-
-See [here](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-long-polling.html) for more information.
-
+The package supports SQS long polling when `timeout` is greater than zero. Long polling reduces empty responses and can lower polling cost; see the [AWS SQS long-polling guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-long-polling.html).
 
 ## Install
 
-```
-$ npm install --save aws-sqs-poll
+```sh
+npm install aws-sqs-poll aws-sdk
 ```
 
+`aws-sdk` v2 is a peer dependency so the package uses the credentials and configuration from your application.
 
 ## Usage
 
 ```js
-const awsSqsPoll = require('aws-sqs-poll');
+const poll = require('aws-sqs-poll');
 
-awsSqsPoll('QueueName')
-    //  ["MessageId": "28f61fd2-b9ca-4cb9-879a-71ea8bce4636",
-    //   "ReceiptHandle": "AQEB9mnsxtAZlwnDERxn3yADAP96QRe0KPbqaKXLvvchqmD4jAr",
-    //   "MD5OfBody": "098f6bcd4621d373cade4e832627b4f6",
-    //   "Body": "test"]
-
-
-awsSqsPoll('QueueName', {AwsAccountId: '123456789012', numberOfMessages: 1, timeout: 20, json: false})
-    //  ["MessageId": "28f61fd2-b9ca-4cb9-879a-71ea8bce4636",
-    //   "ReceiptHandle": "AQEB9mnsxtAZlwnDERxn3yADAP96QRe0KPbqaKXLvvchqmD4jAr",
-    //   "MD5OfBody": "098f6bcd4621d373cade4e832627b4f6",
-    //   "Body": "test"]
+const messages = await poll('orders', {
+	awsAccountId: '123456789012',
+	numberOfMessages: 5,
+	timeout: 20,
+	json: true
+});
 ```
 
 ## API
 
-### aws-sqs-poll(queueName, [options])
+### poll(queueName, options?)
+
+Returns a promise for the received messages, or an empty array when no messages are available.
 
 #### queueName
 
 Type: `string`
 
-#### [options]
+An SQS standard or FIFO queue name. Standard names may contain alphanumeric characters, hyphens, and underscores. FIFO names end in `.fifo`. The full name may contain at most 80 characters.
+
+#### options
 
 Type: `object`
-*Optional*
 
-##### options.numberOfMessages
-
-Type: `number`
-
-Number of messages to be retrieved in 1 polling action. When polling a queue with few messages (< 1000 messages), you will get less messages then the numberOfMessages parameter.
-
-
-##### options.timeout
+##### numberOfMessages
 
 Type: `number`
 
-Timeout (polling time) to listen to the queue for new messages.
+Default: `10`
 
-##### [options.awsAccountId]
+Maximum number of messages requested in one poll. Must be an integer from 1 through 10. SQS may return fewer messages.
+
+##### timeout
+
+Type: `number`
+
+Default: `0`
+
+Polling wait time in seconds. `0` uses short polling; values from 1 through 20 enable long polling.
+
+##### awsAccountId
 
 Type: `string`
-*Optional*
 
-AWS account ID of the account that created the queue.
+Twelve-digit AWS account ID of the account that owns the queue.
 
-##### [options.json]
+##### json
 
 Type: `boolean`
-*Optional*
 
-Flag for converting the data back to JSON format
+Default: `false`
+
+Parse each valid JSON message body. Bodies that are not valid JSON remain unchanged.
 
 ## License
 
