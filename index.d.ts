@@ -1,29 +1,32 @@
-interface Options {
-	/**
-	 * Duration in seconds for which the call waits for a message to arrive from the queue before returning
-	 */
-	timeout: number;
-	/**
-	 * Maximum number of messages to return. SQS might return fewer messages even if the maximum number is available
-	 */
-	numberOfMessages: number;
-	/**
-	 * AWS Account id
-	 */
-	awsAccountId?: string;
-	/**
-	 * Flag to indicate that the messages need to be returned a JSON and not as raw strings
-	 */
-	json?: boolean;
+declare namespace awsSQSPoll {
+	interface Options {
+		/**
+		 * Duration in seconds for which the call waits for a message to arrive.
+		 * Must be an integer between 0 and 20. Defaults to 0.
+		 */
+		timeout?: number;
+
+		/**
+		 * Maximum number of messages to return.
+		 * Must be an integer between 1 and 10. Defaults to 10.
+		 */
+		numberOfMessages?: number;
+
+		/** AWS account ID of the account that owns the queue. */
+		awsAccountId?: string;
+
+		/** Parse each valid JSON message body. Defaults to false. */
+		json?: boolean;
+	}
 }
 
 /**
- * Poll an SQS queue for messages
+ * Poll an SQS queue for messages.
  *
- * @param queueName - Name of the queue
- * @param options - Polling options
- * @returns A array of messages
+ * @param queueName - Name of the queue.
+ * @param options - Polling options.
+ * @returns An array of messages, or an empty array when no messages are available.
  */
-declare function awsSQSPOll<T = unknown>(queueName: string, options?: Options): Promise<T>;
+declare function awsSQSPoll<T = unknown[]>(queueName: string, options?: awsSQSPoll.Options): Promise<T>;
 
-export = awsSQSPOll;
+export = awsSQSPoll;
